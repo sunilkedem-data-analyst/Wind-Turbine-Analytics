@@ -1,0 +1,141 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "d85965fd55ba0cfce813",
+  "position": {
+    "x": 300.51558652573749,
+    "y": 145.45503274761722,
+    "z": 7000,
+    "height": 535.16474312802563,
+    "width": 370.49866831940238,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "filledMap",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTurbines"
+                    }
+                  },
+                  "Property": "Country"
+                }
+              },
+              "queryRef": "DimTurbines.Country",
+              "nativeQueryRef": "Country",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTurbines"
+                    }
+                  },
+                  "Property": "Site"
+                }
+              },
+              "queryRef": "DimTurbines.Site",
+              "nativeQueryRef": "Site",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTurbines"
+                    }
+                  },
+                  "Property": "TurbineID"
+                }
+              },
+              "queryRef": "DimTurbines.TurbineID",
+              "nativeQueryRef": "TurbineID",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTurbines"
+                    }
+                  },
+                  "Property": "TurbineName"
+                }
+              },
+              "queryRef": "DimTurbines.TurbineName",
+              "nativeQueryRef": "TurbineName",
+              "active": false
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measure"
+                    }
+                  },
+                  "Property": "TotalMaintainenceCost"
+                }
+              },
+              "queryRef": "Measure.TotalMaintainenceCost",
+              "nativeQueryRef": "TotalMaintainenceCost"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "dataPoint": [
+        {
+          "properties": {
+            "fillRule": {
+              "linearGradient2": {
+                "min": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'minColor'"
+                      }
+                    }
+                  }
+                },
+                "max": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'maxColor'"
+                      }
+                    }
+                  }
+                },
+                "nullColoringStrategy": {
+                  "strategy": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'asZero'"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

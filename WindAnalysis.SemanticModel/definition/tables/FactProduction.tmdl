@@ -1,0 +1,73 @@
+table FactProduction
+	lineageTag: 6191d55c-fb65-4711-a298-a867d9dc79a6
+
+	column ProductionID
+		dataType: int64
+		formatString: 0
+		lineageTag: 25d5b2c7-c27d-48a4-bdd6-9ed95d52fbe7
+		summarizeBy: count
+		sourceColumn: ProductionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TurbineID
+		dataType: int64
+		formatString: 0
+		lineageTag: e3f8882b-8fc2-46f0-af9c-72f55359508f
+		summarizeBy: none
+		sourceColumn: TurbineID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductionDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e3cc601a-984f-4326-9fed-0e9bf3c979b9
+		summarizeBy: none
+		sourceColumn: ProductionDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column WindSpeed
+		dataType: double
+		lineageTag: 9c058c2f-3bc8-4e6d-af09-646169ffeade
+		summarizeBy: sum
+		sourceColumn: WindSpeed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EnergyProducedMWh
+		dataType: double
+		lineageTag: 582a97f6-faf8-4d0d-9b1a-363a6b0d7abe
+		summarizeBy: sum
+		sourceColumn: EnergyProducedMWh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AvailabilityPercent
+		dataType: double
+		lineageTag: 46df8e5b-34d7-415f-abaa-1675d273e378
+		summarizeBy: sum
+		sourceColumn: AvailabilityPercent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactProduction = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "WindTurbineDB"),
+				    dbo_FactProduction = Source{[Schema="dbo",Item="FactProduction"]}[Data]
+				in
+				    dbo_FactProduction
+
+	annotation PBI_ResultType = Table
+

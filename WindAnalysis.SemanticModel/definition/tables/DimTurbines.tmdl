@@ -1,0 +1,73 @@
+table DimTurbines
+	lineageTag: ac4eaf77-1dda-4005-8211-7d51b2693c34
+
+	column TurbineID
+		dataType: int64
+		formatString: 0
+		lineageTag: f9b12ab0-5385-4c40-b142-67b90a2e27b8
+		summarizeBy: none
+		sourceColumn: TurbineID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TurbineName
+		dataType: string
+		lineageTag: ee90f93d-ba6f-4cfa-83ba-e8cc3d6f20c8
+		summarizeBy: none
+		sourceColumn: TurbineName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: d39eadec-166b-44b9-b7bb-990dbc710b78
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Site
+		dataType: string
+		lineageTag: c15fa229-55ca-4bd2-b3a2-b993a6b1b7fd
+		summarizeBy: none
+		sourceColumn: Site
+
+		annotation SummarizationSetBy = Automatic
+
+	column CapacityMW
+		dataType: double
+		lineageTag: 1aba102a-0dee-46ea-95e3-a381f3b8e0c6
+		summarizeBy: sum
+		sourceColumn: CapacityMW
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CommissionDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9d7e11c5-89c5-4ab4-8d74-6269fc32e46a
+		summarizeBy: none
+		sourceColumn: CommissionDate
+
+		variation Variation
+			isDefault
+			relationship: d83fe61d-9d76-4423-8114-28e1e6cbc445
+			defaultHierarchy: LocalDateTable_b7513da1-e7c2-4fbb-81ff-5d6d0c98b7ad.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition DimTurbines = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "WindTurbineDB"),
+				    dbo_DimTurbines = Source{[Schema="dbo",Item="DimTurbines"]}[Data]
+				in
+				    dbo_DimTurbines
+
+	annotation PBI_ResultType = Table
+

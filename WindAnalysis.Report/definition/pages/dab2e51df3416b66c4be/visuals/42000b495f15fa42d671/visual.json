@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "42000b495f15fa42d671",
+  "position": {
+    "x": 680.61977587564286,
+    "y": 155.06055377812024,
+    "z": 4000,
+    "height": 257.97685053350978,
+    "width": 256.60463324343795,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "donutChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactMaintenance"
+                    }
+                  },
+                  "Property": "MaintenanceType"
+                }
+              },
+              "queryRef": "FactMaintenance.MaintenanceType",
+              "nativeQueryRef": "MaintenanceType",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measure"
+                    }
+                  },
+                  "Property": "TotalMaintainenceCost"
+                }
+              },
+              "queryRef": "Measure.TotalMaintainenceCost",
+              "nativeQueryRef": "TotalMaintainenceCost"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Measure"
+                  }
+                },
+                "Property": "TotalMaintainenceCost"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

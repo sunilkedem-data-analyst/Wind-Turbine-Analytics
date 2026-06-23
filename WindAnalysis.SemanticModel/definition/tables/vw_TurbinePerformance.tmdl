@@ -1,0 +1,93 @@
+table vw_TurbinePerformance
+	lineageTag: 03c5ffd4-0503-4284-bfd2-9405b898078a
+
+	column TurbineID
+		dataType: int64
+		formatString: 0
+		lineageTag: 9f5c5917-8db9-4dab-97a4-0b5d5d8f68fd
+		summarizeBy: count
+		sourceColumn: TurbineID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TurbineName
+		dataType: string
+		lineageTag: 93a35f9b-e21c-4771-b73d-f62d51f4076a
+		summarizeBy: none
+		sourceColumn: TurbineName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: e2fcd657-cf91-420b-b8c5-c9573595b811
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Site
+		dataType: string
+		lineageTag: b76b90cd-5120-4841-ad54-d7c7ecdf2b9c
+		summarizeBy: none
+		sourceColumn: Site
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductionDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0fa98d43-e8d5-44af-9683-3e14580d8e37
+		summarizeBy: none
+		sourceColumn: ProductionDate
+
+		variation Variation
+			isDefault
+			relationship: 74ce1813-c9ff-49c4-9e48-6ec15c395259
+			defaultHierarchy: LocalDateTable_7ac27e8a-766d-44f1-8f1f-39a55b9f19d5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column WindSpeed
+		dataType: double
+		lineageTag: e178e529-7f1f-446a-948e-9274b8d093e3
+		summarizeBy: sum
+		sourceColumn: WindSpeed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EnergyProducedMWh
+		dataType: double
+		lineageTag: 94420843-88ef-454f-ba95-80102125ff3e
+		summarizeBy: sum
+		sourceColumn: EnergyProducedMWh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AvailabilityPercent
+		dataType: double
+		lineageTag: 6e187e2a-a81a-4d3e-8870-8ec3931f2bda
+		summarizeBy: sum
+		sourceColumn: AvailabilityPercent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition vw_TurbinePerformance = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "WindTurbineDB"),
+				    dbo_vw_TurbinePerformance = Source{[Schema="dbo",Item="vw_TurbinePerformance"]}[Data]
+				in
+				    dbo_vw_TurbinePerformance
+
+	annotation PBI_ResultType = Table
+

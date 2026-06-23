@@ -1,0 +1,101 @@
+table FactDowntime
+	lineageTag: eb8493fb-3917-4fdc-a935-309ef5b0ea2d
+
+	column DowntimeID
+		dataType: int64
+		formatString: 0
+		lineageTag: 43432266-73c0-497f-b6fa-1109775e9704
+		summarizeBy: count
+		sourceColumn: DowntimeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TurbineID
+		dataType: int64
+		formatString: 0
+		lineageTag: 47bac1b1-9974-4f14-8800-2dd48c491022
+		summarizeBy: none
+		sourceColumn: TurbineID
+
+		annotation SummarizationSetBy = Automatic
+
+	column StartTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bd8663ad-2b9d-415b-8813-1ac0278bc9ca
+		summarizeBy: none
+		sourceColumn: StartTime
+
+		variation Variation
+			isDefault
+			relationship: e5f6a955-26b9-49af-ae06-c7b7f2e0a0d9
+			defaultHierarchy: LocalDateTable_24e50e18-11e7-4433-b481-b894f49c265d.'Date Hierarchy'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column EndTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2c91c669-cd57-4556-81ec-b78c6e25f2bf
+		summarizeBy: none
+		sourceColumn: EndTime
+
+		variation Variation
+			isDefault
+			relationship: f98a77bf-5866-45aa-aee0-5e9a0f67aab2
+			defaultHierarchy: LocalDateTable_d17778c0-cad8-4954-9106-d95d7ee412e2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reason
+		dataType: string
+		lineageTag: 0423efcf-32b9-4075-ab6a-d9e4ae24dc90
+		summarizeBy: none
+		sourceColumn: Reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column DownTimeHrs
+		dataType: int64
+		formatString: 0
+		lineageTag: 89a2c4cd-982c-4415-a407-abb361ead934
+		summarizeBy: sum
+		sourceColumn: DownTimeHrs
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column DowntimeStartDate = DATE(FactDowntime[StartTime].[Year],FactDowntime[StartTime].[MonthNo],FactDowntime[StartTime].[Day])
+		formatString: Long Date
+		lineageTag: c8857fcd-28ad-459c-a1b1-5f16284af37e
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition FactDowntime = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "WindTurbineDB"),
+				    dbo_FactDowntime = Source{[Schema="dbo",Item="FactDowntime"]}[Data],
+				    #"Added Custom" = Table.AddColumn(dbo_FactDowntime, "DownTime", each [EndTime]-[StartTime]),
+				    #"Removed Columns" = Table.RemoveColumns(#"Added Custom",{"DownTime"}),
+				    #"Added Custom1" = Table.AddColumn(#"Removed Columns", "DownTime", each [EndTime]-[StartTime]),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom1",{"DownTime"}),
+				    #"Added Custom2" = Table.AddColumn(#"Removed Columns1", "Duration", each Duration.TotalHours([EndTime]-[StartTime])),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom2",{{"Duration", Int64.Type}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Duration", "DownTimeHrs"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

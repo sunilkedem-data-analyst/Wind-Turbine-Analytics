@@ -1,0 +1,107 @@
+table Measure
+	lineageTag: 7ddc2f50-ca2b-4c60-b2e5-e663cdf3314d
+
+	measure 'Total Energy' =
+			
+			SUM(FactProduction[EnergyProducedMWh])
+		lineageTag: f86210a4-179c-41d8-956e-0dc93263c06f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Wind Speed' =
+			
+			AVERAGE(FactProduction[WindSpeed])
+		lineageTag: 4d9802f2-a9c8-49b0-8746-6ce5def81e1d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Availability' =
+			
+			AVERAGE(FactProduction[AvailabilityPercent])
+		lineageTag: 81667dd7-9118-47a4-a301-310984f29c1e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TotalFaults = DISTINCTCOUNT(FactFaults[FaultID])
+		formatString: 0
+		lineageTag: ad16ffc8-a202-469e-bfcd-ab1b762cef1e
+
+	measure TotalDownTimehrs = SUM(FactDowntime[DownTimeHrs])
+		formatString: #,0.00
+		lineageTag: 331bd018-6cc2-496d-9291-b7e951749329
+
+	measure TotalMaintainenceCost = sum(FactMaintenance[Cost])
+		lineageTag: 2c64f39e-5e3d-453b-98d1-9683305d6624
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure CriticalFaults = CALCULATE([TotalFaults],FactFaults[Severity]="Critical")
+		formatString: 0
+		lineageTag: 5d688823-c440-4f32-be86-13ae4673a998
+
+	measure HighFaults = CALCULATE([TotalFaults],FactFaults[Severity]="High")
+		formatString: 0
+		lineageTag: 70eba70b-adb3-4c4c-9db4-4230cf79deae
+
+	measure TotalFaulityTurbines = CALCULATE(DISTINCTCOUNT(FactFaults[TurbineID]))
+		formatString: 0
+		lineageTag: e0949c2b-12f3-418b-8675-d3e6e4da7340
+
+	measure MaintainenceCost = SUM(FactMaintenance[Cost])
+		lineageTag: 8368b6b7-f59c-42fd-bd6d-acbc0fe7579c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MaintaineneceEvents = DISTINCTCOUNT(FactMaintenance[MaintenanceID])
+		formatString: 0
+		lineageTag: 2a5fbe38-7d6c-446e-b762-0c4f158e8492
+
+	measure AverageMaintainenceCost = AVERAGE(FactMaintenance[Cost])
+		lineageTag: 35b864a0-ba5e-4a2e-b17e-ffd3cac472c1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MaintainenceCostPerTurbine = DIVIDE([TotalMaintainenceCost],DISTINCTCOUNT(DimTurbines[TurbineID]),0)
+		lineageTag: c98c3dbf-2402-45f2-a986-b6563b573dbc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Dynamic Title' = "Maintenance Analysis - "&SELECTEDVALUE(DimTurbines[Country],"AllCountries")
+		lineageTag: 5f2ebd56-eb38-47f2-9b53-fdaa53642c17
+
+	measure TotalDownTime(hrs) = SUM(FactDowntime[DownTimeHrs])
+		formatString: 0
+		lineageTag: ea721618-eeb7-4d28-9a5a-eae78505515f
+
+	measure DowntimeEvents = COUNT(FactDowntime[DowntimeID])
+		formatString: 0
+		lineageTag: e90c55fb-07b9-45ee-ad56-65dd30358119
+
+	measure AverageDownTime(hrs) = AVERAGE(FactDowntime[DownTimeHrs])
+		lineageTag: a8c0887c-ccb5-446d-8715-e5913dd5aadc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MaxDowntime(hrs) = MAX(FactDowntime[DownTimeHrs])
+		formatString: 0
+		lineageTag: 4fca4f7e-d13b-4f1f-b9c7-420349ca589c
+
+	measure 'Affected Turb by DownTime' = DISTINCTCOUNT(FactDowntime[TurbineID])
+		formatString: 0
+		lineageTag: 337588f0-4255-49a9-a8ea-d1ddd5ff8b03
+
+	measure Downtimetitle = "DownTimeAnalysis - "& SELECTEDVALUE(DimTurbines[Country],"All Countries")
+		lineageTag: ad5fe7d8-1c1f-4e63-848f-ea88fa9de6cf
+
+	partition Measure = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t, Column2 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column2", "Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,65 @@
+relationship 591276fe-263e-4892-8ccb-cf3f03f461f2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimDate.DateKey
+	toColumn: LocalDateTable_23a5e003-10d3-4800-a5c6-d13541f725a5.Date
+
+relationship d83fe61d-9d76-4423-8114-28e1e6cbc445
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimTurbines.CommissionDate
+	toColumn: LocalDateTable_b7513da1-e7c2-4fbb-81ff-5d6d0c98b7ad.Date
+
+relationship 74ce1813-c9ff-49c4-9e48-6ec15c395259
+	joinOnDateBehavior: datePartOnly
+	fromColumn: vw_TurbinePerformance.ProductionDate
+	toColumn: LocalDateTable_7ac27e8a-766d-44f1-8f1f-39a55b9f19d5.Date
+
+relationship 4ff8484d-50f5-9541-3088-c56f4c631391
+	fromColumn: FactFaults.TurbineID
+	toColumn: DimTurbines.TurbineID
+
+	annotation PBI_IsFromSource = FS
+
+relationship 59628d94-a5fc-d865-1ef1-c6e5bbdbd046
+	fromColumn: FactProduction.TurbineID
+	toColumn: DimTurbines.TurbineID
+
+	annotation PBI_IsFromSource = FS
+
+relationship a1fe854e-1cfb-8706-cb5f-35f964e4cc47
+	fromColumn: FactDowntime.TurbineID
+	toColumn: DimTurbines.TurbineID
+
+	annotation PBI_IsFromSource = FS
+
+relationship d9e181f1-fa3c-fa7a-46a2-0d528ee18305
+	fromColumn: FactMaintenance.TurbineID
+	toColumn: DimTurbines.TurbineID
+
+	annotation PBI_IsFromSource = FS
+
+relationship e14355d8-b6f9-2fff-7dbf-9cf2c935c1f5
+	fromColumn: FactProduction.ProductionDate
+	toColumn: DimDate.DateKey
+
+relationship ece887d1-4c29-a4b3-a6dd-c82cb5daf85e
+	fromColumn: FactFaults.FaultDate
+	toColumn: DimDate.DateKey
+
+relationship 8c6e64f2-5316-fef2-7022-aee29dca27f4
+	fromColumn: FactMaintenance.MaintenanceDate
+	toColumn: DimDate.DateKey
+
+relationship e5f6a955-26b9-49af-ae06-c7b7f2e0a0d9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FactDowntime.StartTime
+	toColumn: LocalDateTable_24e50e18-11e7-4433-b481-b894f49c265d.Date
+
+relationship f98a77bf-5866-45aa-aee0-5e9a0f67aab2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FactDowntime.EndTime
+	toColumn: LocalDateTable_d17778c0-cad8-4954-9106-d95d7ee412e2.Date
+
+relationship 6b71dd02-2c74-f537-8502-542e2dd17391
+	fromColumn: FactDowntime.DowntimeStartDate
+	toColumn: DimDate.DateKey
+

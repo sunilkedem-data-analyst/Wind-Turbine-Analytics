@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "867fe4b938255b822dad",
+  "position": {
+    "x": 832.93589507361935,
+    "y": 1.3722172900718606,
+    "z": 2000,
+    "height": 96.055210305030243,
+    "width": 208.57702809092279,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measure"
+                    }
+                  },
+                  "Property": "AverageMaintainenceCost"
+                }
+              },
+              "queryRef": "Measure.AverageMaintainenceCost",
+              "nativeQueryRef": "AverageMaintainenceCost",
+              "format": "\"₹\" #,0.00;\"₹\" -#,0.00;\"₹\" #,0.00"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Measure"
+                  }
+                },
+                "Property": "AverageMaintainenceCost"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,65 @@
+table DimDate
+	lineageTag: 73ffbc57-a165-4a49-afa8-240c24b45620
+
+	column DateKey
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4ab3ef02-2125-473f-b493-04ce33e9b472
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		variation Variation
+			isDefault
+			relationship: 591276fe-263e-4892-8ccb-cf3f03f461f2
+			defaultHierarchy: LocalDateTable_23a5e003-10d3-4800-a5c6-d13541f725a5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column YearNum
+		dataType: int64
+		formatString: 0
+		lineageTag: 2f829f60-99e8-4858-9101-c405776b0da0
+		summarizeBy: sum
+		sourceColumn: YearNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column QuarterNum
+		dataType: int64
+		formatString: 0
+		lineageTag: f54519f4-e202-42ce-a145-f82681cfbd28
+		summarizeBy: sum
+		sourceColumn: QuarterNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNum = MONTH(DimDate[DateKey])
+		formatString: 0
+		lineageTag: 88141a02-517a-40a3-895d-25afd8ebd314
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName = FORMAT(DimDate[DateKey],"MMM")
+		lineageTag: 2e620a3e-18f4-4f2d-b277-aa8432c003c7
+		summarizeBy: none
+		sortByColumn: MonthNum
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimDate = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "WindTurbineDB"),
+				    dbo_DimDate = Source{[Schema="dbo",Item="DimDate"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dbo_DimDate,{"MonthNum", "MonthName"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

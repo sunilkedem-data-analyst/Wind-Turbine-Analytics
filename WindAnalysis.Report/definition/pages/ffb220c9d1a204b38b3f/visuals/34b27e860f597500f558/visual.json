@@ -1,0 +1,146 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "34b27e860f597500f558",
+  "position": {
+    "x": 391.08192767048024,
+    "y": 134.47729442704232,
+    "z": 8000,
+    "height": 555.74800247910355,
+    "width": 456.94835759392959,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "filledMap",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTurbines"
+                    }
+                  },
+                  "Property": "Country"
+                }
+              },
+              "queryRef": "DimTurbines.Country",
+              "nativeQueryRef": "Country",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTurbines"
+                    }
+                  },
+                  "Property": "Site"
+                }
+              },
+              "queryRef": "DimTurbines.Site",
+              "nativeQueryRef": "Site",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTurbines"
+                    }
+                  },
+                  "Property": "TurbineID"
+                }
+              },
+              "queryRef": "DimTurbines.TurbineID",
+              "nativeQueryRef": "TurbineID",
+              "active": false
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTurbines"
+                    }
+                  },
+                  "Property": "TurbineName"
+                }
+              },
+              "queryRef": "DimTurbines.TurbineName",
+              "nativeQueryRef": "TurbineName",
+              "active": false
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactDowntime"
+                        }
+                      },
+                      "Property": "DownTimeHrs"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(FactDowntime.DownTimeHrs)",
+              "nativeQueryRef": "Sum of DownTimeHrs"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "dataPoint": [
+        {
+          "properties": {
+            "fillRule": {
+              "linearGradient2": {
+                "min": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'minColor'"
+                      }
+                    }
+                  }
+                },
+                "max": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'maxColor'"
+                      }
+                    }
+                  }
+                },
+                "nullColoringStrategy": {
+                  "strategy": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'asZero'"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

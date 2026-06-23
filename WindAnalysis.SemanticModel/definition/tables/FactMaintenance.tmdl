@@ -1,0 +1,61 @@
+table FactMaintenance
+	lineageTag: 8fe40044-5e78-4f8c-8cc9-9e49d0185110
+
+	column MaintenanceID
+		dataType: int64
+		formatString: 0
+		lineageTag: a3230342-8176-41a6-8034-0bc3db8fb3fa
+		summarizeBy: count
+		sourceColumn: MaintenanceID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TurbineID
+		dataType: int64
+		formatString: 0
+		lineageTag: f894e8b8-eb26-4001-95b6-435a5c6b8fa4
+		summarizeBy: none
+		sourceColumn: TurbineID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaintenanceDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 125e2da9-0f0e-4a94-8bc2-8629671c05fd
+		summarizeBy: none
+		sourceColumn: MaintenanceDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MaintenanceType
+		dataType: string
+		lineageTag: 6e6cf6f6-2703-478d-9a15-31875fe4d8e8
+		summarizeBy: none
+		sourceColumn: MaintenanceType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cost
+		dataType: double
+		lineageTag: 0e4ce163-fc80-4fad-b91e-ddd594f0ee24
+		summarizeBy: sum
+		sourceColumn: Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FactMaintenance = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "WindTurbineDB"),
+				    dbo_FactMaintenance = Source{[Schema="dbo",Item="FactMaintenance"]}[Data]
+				in
+				    dbo_FactMaintenance
+
+	annotation PBI_ResultType = Table
+

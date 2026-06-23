@@ -1,0 +1,59 @@
+table FactFaults
+	lineageTag: 60cf6a4d-ae54-4cad-91c3-5b2646a2a7bf
+
+	column FaultID
+		dataType: int64
+		formatString: 0
+		lineageTag: b0c25b06-e821-4bf3-b2f9-f6aa7701a660
+		summarizeBy: count
+		sourceColumn: FaultID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TurbineID
+		dataType: int64
+		formatString: 0
+		lineageTag: a9440ccb-7ab7-4e05-bc13-8c8f32450d4e
+		summarizeBy: none
+		sourceColumn: TurbineID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FaultDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5de7dba8-5ffe-4bad-81c1-c0c0f72da8cb
+		summarizeBy: none
+		sourceColumn: FaultDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FaultCode
+		dataType: string
+		lineageTag: aa96dfca-293c-4b03-915d-6af9df212146
+		summarizeBy: none
+		sourceColumn: FaultCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Severity
+		dataType: string
+		lineageTag: 0949a7d6-6164-4541-a327-fde23fac7906
+		summarizeBy: none
+		sourceColumn: Severity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactFaults = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "WindTurbineDB"),
+				    dbo_FactFaults = Source{[Schema="dbo",Item="FactFaults"]}[Data]
+				in
+				    dbo_FactFaults
+
+	annotation PBI_ResultType = Table
+

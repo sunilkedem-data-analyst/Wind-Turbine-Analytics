@@ -1,0 +1,125 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 1.6000000238418579
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 566.96320233181154,
+            "y": 173.07620685321513
+          },
+          "nodeIndex": "DimDate",
+          "nodeLineageTag": "73ffbc57-a165-4a49-afa8-240c24b45620",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 259.16627238644651,
+            "y": 173.17403650401707
+          },
+          "nodeIndex": "DimTurbines",
+          "nodeLineageTag": "ac4eaf77-1dda-4005-8211-7d51b2693c34",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 832.96320233181154,
+            "y": 7
+          },
+          "nodeIndex": "FactDowntime",
+          "nodeLineageTag": "eb8493fb-3917-4fdc-a935-309ef5b0ea2d",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 767.90892184470681,
+            "y": 452.3351767351399
+          },
+          "nodeIndex": "FactFaults",
+          "nodeLineageTag": "60cf6a4d-ae54-4cad-91c3-5b2646a2a7bf",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 5
+          },
+          "nodeIndex": "FactMaintenance",
+          "nodeLineageTag": "8fe40044-5e78-4f8c-8cc9-9e49d0185110",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 390.15241370643042
+          },
+          "nodeIndex": "FactProduction",
+          "nodeLineageTag": "6191d55c-fb65-4711-a298-a867d9dc79a6",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1119.9632023318115,
+            "y": 228.07620685321513
+          },
+          "nodeIndex": "vw_TurbinePerformance",
+          "nodeLineageTag": "03c5ffd4-0503-4284-bfd2-9405b898078a",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1403.9632023318115,
+            "y": 253.66758836756992
+          },
+          "nodeIndex": "Measure",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 1
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "05481fd309790e16e231",
+  "position": {
+    "x": 1044.1890108018338,
+    "y": 2.3255879973314784,
+    "z": 3000,
+    "height": 94.186313891924883,
+    "width": 222.09365374515619,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measure"
+                    }
+                  },
+                  "Property": "MaintainenceCostPerTurbine"
+                }
+              },
+              "queryRef": "Measure.CostPerTurbine",
+              "nativeQueryRef": "CostPerTurbine",
+              "format": "\"₹\" #,0.00;\"₹\" -#,0.00;\"₹\" #,0.00"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Measure"
+                  }
+                },
+                "Property": "MaintainenceCostPerTurbine"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

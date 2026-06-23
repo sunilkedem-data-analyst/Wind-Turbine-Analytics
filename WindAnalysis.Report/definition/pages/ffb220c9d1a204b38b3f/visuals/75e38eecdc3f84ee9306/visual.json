@@ -1,0 +1,85 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "75e38eecdc3f84ee9306",
+  "position": {
+    "x": 873.25829299797022,
+    "y": 427.90819150899205,
+    "z": 6000,
+    "height": 265.11703169578857,
+    "width": 389.53598955302266,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactDowntime"
+                    }
+                  },
+                  "Property": "Reason"
+                }
+              },
+              "queryRef": "FactDowntime.Reason",
+              "nativeQueryRef": "Reason",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FactDowntime"
+                        }
+                      },
+                      "Property": "DownTimeHrs"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(FactDowntime.DownTimeHrs)",
+              "nativeQueryRef": "Sum of DownTimeHrs"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "FactDowntime"
+                      }
+                    },
+                    "Property": "DownTimeHrs"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

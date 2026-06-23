@@ -1,0 +1,31 @@
+model Model
+	culture: en-IN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["DimDate","DimTurbines","FactDowntime","FactFaults","FactMaintenance","FactProduction","vw_TurbinePerformance","Measure"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DimDate
+ref table DateTableTemplate_ea1ecfa8-96fa-4746-857a-f19010d23bbb
+ref table LocalDateTable_23a5e003-10d3-4800-a5c6-d13541f725a5
+ref table DimTurbines
+ref table LocalDateTable_b7513da1-e7c2-4fbb-81ff-5d6d0c98b7ad
+ref table FactDowntime
+ref table FactFaults
+ref table FactMaintenance
+ref table FactProduction
+ref table vw_TurbinePerformance
+ref table LocalDateTable_7ac27e8a-766d-44f1-8f1f-39a55b9f19d5
+ref table Measure
+ref table LocalDateTable_24e50e18-11e7-4433-b481-b894f49c265d
+ref table LocalDateTable_d17778c0-cad8-4954-9106-d95d7ee412e2
+
+ref cultureInfo en-IN
+
